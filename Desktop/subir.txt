@@ -1,0 +1,96 @@
+#No quise sacar estos comentarios por que me ayudan a ver mejor que se hizo en cada paso :D
+#Parte uno
+
+CREATE DATABASE posts; #crear base de datos
+
+CREATE TABLE post( #Crear tabla post
+	id SERIAL,
+	usuario VARCHAR(35),
+	fecha DATE,
+	contenido VARCHAR,
+	descripcion VARCHAR,
+	Primary KEY (id)
+);
+
+INSERT INTO post (usuario, fecha, contenido, descripcion)
+VALUES ('Pamela', '12/06/2015', 'Pamela CHU', 'Pamela vino de los barrios bajos de Hong Kong');
+
+INSERT INTO post (usuario, fecha, contenido, descripcion)
+VALUES ('Pamela', '12/06/2015', 'China', 'Pamela salio del mal ambiente de las calles para volver a china donde crearia su fundacion para chicas en su misma situacion');
+
+INSERT INTO post (usuario, fecha, contenido, descripcion)
+VALUES ('Carlos', '04/12/2005', 'Carlos la hormiga', 'Carlos era la hormiga de cosmo quien murió en horribles circunstacias dejando con el corazón en pedazos a Cosmo');
+
+#insertados los tres post
+
+ALTER TABLE post ADD titulo VARCHAR; #modificar la table agregando el titulo
+
+UPDATE post SET titulo='CHU' WHERE id=1; #Agregar titulo a las publicaciones
+UPDATE post SET titulo='China' WHERE id=2;
+UPDATE post SET titulo='Padrinos Magicos' WHERE id=1;
+
+#insertar dos post para Pedro
+
+INSERT INTO post (usuario, fecha, contenido, descripcion, titulo)
+VALUES ('Pedro', '12/06/1976', 'Amigo de Heidi', 'Debo confesar que Pedro siempre me parecio el amigo flaite de Heidi', 'Heidi');
+
+INSERT INTO post (usuario, fecha, contenido, descripcion, titulo)
+VALUES ('Pedro', '12/07/1976', 'Amigo de Heidi', 'Los liveaction no me suelen gustar por que no logran la misma sensacion que la serie pero esta vez el live action me dejo muy satisfecha.', 'Heidi LIVEACTION2015');
+
+DELETE FROM post WHERE id=3; #Eliminar el post de Carlos
+
+INSERT INTO post (usuario, fecha, contenido, descripcion, titulo)
+VALUES ('Carlos', '04/12/2005', 'Carlos la hormiga', 'Carlos regreso de la muerte para vengarse de Cosmo por que su torpeza provoco que el muriera CHAN! CHAN! ', 'La resurrecion de Carlos');
+#ingresar un nuevo post para Carlos
+
+#PARTE 2
+
+CREATE TABLE comentarios(
+	id SERIAL,
+	fecha TIMESTAMP,
+	contenido VARCHAR,
+	id_post INT,
+	FOREING KEY (id_post) REFERENCES post (id),
+	PRIMARY KEY (id)
+);
+
+#no entiendo por que hay que ponerle la primary key
+
+INSERT INTO comentarios (fecha, contenido, id_post)
+VALUES ('04/08/2006 03:04:00', 'Pame', '1'); #Pamela
+
+INSERT INTO comentarios (fecha, contenido, id_post)
+VALUES ('07/03/2008 06:50:00', 'Conspiracion','1'); #Pamela
+
+INSERT INTO comentarios (fecha, contenido, id_post)
+VALUES ('15/09/2009 14:59:00', 'Carliños','6'); #Carlos
+
+INSERT INTO comentarios (fecha, contenido, id_post)
+VALUES ('04/08/2005 20:04:00', 'Super Carlos','6'); #Carlos
+
+INSERT INTO comentarios (fecha, contenido, id_post)
+VALUES ('06/09/2010 03:04:00', 'OH POR DIOS! MATARON A CARLOS!','6'); #Carlos
+
+INSERT INTO comentarios (fecha, contenido, id_post)
+VALUES ('22/08/2010 18:04:00', 'G.G Carlos','6'); #Carlos
+
+INSERT INTO post (usuario, fecha, contenido, descripcion, titulo)
+VALUES ('Margarita', '20/12/2016', 'Margarita como las flores', 'Margarita Marga Marga estara protagonizando la nueva novela para adultos!',  'Marg-Margarita'); #Margarita
+
+INSERT INTO comentarios (fecha, contenido, id_post)
+VALUES ('04/12/2014 15:00:00', 'Mi imanación no esta de parte de Margarita','7'); #Margarita1
+
+INSERT INTO comentarios (fecha, contenido, id_post)
+VALUES ('04/10/2004 20:00:00', 'Es que Margarita como que no me suena a nada','7'); #Margarita2
+
+INSERT INTO comentarios (fecha, contenido, id_post)
+VALUES ('04/11/2003 22:00:00', 'Más encima siento que seria fome no escribir nada aquí','7'); #Margarita3
+
+INSERT INTO comentarios (fecha, contenido, id_post)
+VALUES ('20/09/2001 21:00:00', 'Creo quen en esa fecha cayeron las torres gemelas','7'); #Margarita4
+
+INSERT INTO comentarios (fecha, contenido, id_post)
+VALUES ('25/07/2020 23:00:00', 'Un dia como hoy, cambie para siempre...CHAN CHA!','7'); #Margarita5
+
+
+
